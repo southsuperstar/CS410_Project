@@ -15,7 +15,7 @@ merge_labels_drop = ['business_id', 'review_id', 'user_id']
 
 
 '''
-    Parse the business json log from yelp dataset.
+    Parse the business json log from yelp dataset
     Filter in the businesses fit below criteria:
         1. It is a restaurant.
         2. Is is a Chinese restaurant. (we use Chinese restaurant to prove the concept, tool can be expanded to other kinds of food as well.
@@ -90,6 +90,6 @@ user_df.to_csv('users_chinese_restaurants.csv', encoding='utf-8')
 results = all_review_df.merge(business_df, on='business_id')
 results = results.merge(user_df, on='user_id')
 results['business_and_id'] = results['business_name'].str.cat(results['business_id'], sep='_')
-results['user_and_id'] = results['user_name'].str.cat(results['user_id'], sep=',')
+results['user_and_id'] = results['user_name'].str.cat(results['user_id'], sep='_')
 results.drop(merge_labels_drop, axis=1, inplace=True)
 results.to_csv('merged_user_rev_business_results.csv', encoding='utf-8')
